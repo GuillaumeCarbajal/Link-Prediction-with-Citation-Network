@@ -11,6 +11,13 @@ def link_list(path_of_file):
 	data_set = [element[0].split(" ") for element in data_set]
 	return data_set
 
+## Store the nodes "From" & "To" in a Dataframe
+features = pd.DataFrame([[i[0], i[1]]for i in data_set])
+features.columns = ['From', 'To']
+## Store the labels in y
+y = [i[2] for i in data_set]
+
+
 def create_graph(link_data):
 	G = nx.Graph()
 
@@ -30,7 +37,23 @@ def create_graph(link_data):
 
 	return G
 
-def number_common_neighbors(G):
-	nb_common_neighbors = []
-	# TO FINISH
-	return nb_common_neighbors 
+
+## Compute the common neighbors between 2 nodes
+def common_neighbors(features, G):
+    nb_common_neighbors = []
+    for i in range(features.shape[0]):
+        a = features['From'][i]
+        b = features['To'][i]
+        nb_common_neighbors.append(len(sorted(nx.common_neighbors(G, a, b)))) # ajoute le nombre de voisins communs
+    return nb_common_neighbors
+
+## Compute the Link-based Jaccard coefficient between 2 nodes
+def Jaccard_coef(features, G):
+    J = []
+    for i in range(features.shape[0]):
+        a = features['From'][i]
+        b = features['To'][i]
+        pred = nx.jaccard_coefficient(G, [(a, b)])
+        for u, v ,p in pred:
+            J.append(p)
+    return J
