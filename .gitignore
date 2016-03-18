@@ -60,3 +60,9 @@ target/
 
 #Ipython Notebook
 .ipynb_checkpoints
+
+#Textfiles 
+*.txt
+
+#csv files 
+*.csv
