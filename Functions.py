@@ -19,7 +19,7 @@ y = [i[2] for i in data_set]
 
 
 def create_graph(link_data):
-	G = nx.Graph()
+	G = nx.DiGraph()
 
 	# extract only the linked nodes from the training set
 	linked_nodes = [[i[0], i[1]] for i in link_data if not i[2] in ['0']]
