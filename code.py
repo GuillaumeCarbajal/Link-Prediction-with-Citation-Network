@@ -5,7 +5,6 @@ import nltk
 import csv
 import pandas as pd
 
-%%time
 
 import networkx as nx
 import community
